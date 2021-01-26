@@ -1,5 +1,6 @@
 package com.edusys.form;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -13,9 +14,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -37,7 +41,7 @@ import com.edusys.model.ChuyenDe;
 import com.edusys.model.KhoaHoc;
 
 @SuppressWarnings("serial")
-public class QuanLyKhoaHoc extends JFrame {
+public class QuanLyKhoaHoc extends JInternalFrame {
 
 	private JPanel contentPane;
 	private JTextField textChuyenDe;
@@ -89,13 +93,16 @@ public class QuanLyKhoaHoc extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		JPanel top = new JPanel();
+		contentPane.add(top, BorderLayout.NORTH);
+		top.setLayout(new BorderLayout(0, 0));
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.setBounds(10, 32, 602, 43);
-		contentPane.add(panel);
-		panel.setLayout(null);
+		top.add(panel, BorderLayout.SOUTH);
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loadKhoaHoc();
@@ -112,25 +119,38 @@ public class QuanLyKhoaHoc extends JFrame {
 		});
 
 		comboBox.setBounds(10, 11, 582, 22);
-		panel.add(comboBox);
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(comboBox, 0, 588, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(7, Short.MAX_VALUE))
+		);
+		panel.setLayout(gl_panel);
 
 		JLabel lblChuyn = new JLabel("CHUYÊN ĐỀ");
 		lblChuyn.setForeground(Color.RED);
 		lblChuyn.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblChuyn.setBounds(10, 0, 257, 34);
-		contentPane.add(lblChuyn);
-
+		top.add(lblChuyn, BorderLayout.NORTH);
+		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(10, 86, 602, 345);
-		contentPane.add(tabbedPane);
-
+		contentPane.add(tabbedPane, BorderLayout.CENTER);
+		
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("Danh sách", null, panel_1, null);
-		panel_1.setLayout(null);
-
+		panel_1.setLayout(new BorderLayout(0, 0));
+		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 11, 577, 295);
-		panel_1.add(scrollPane_1);
+		panel_1.add(scrollPane_1, BorderLayout.CENTER);
 
 		table = new JTable();
 		scrollPane_1.setViewportView(table);

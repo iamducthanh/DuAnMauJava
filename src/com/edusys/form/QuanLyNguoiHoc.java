@@ -1,5 +1,6 @@
 package com.edusys.form;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -15,8 +16,11 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.ButtonGroup;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -37,7 +41,7 @@ import com.edusys.helper.Validate;
 import com.edusys.model.NguoiHoc;
 
 @SuppressWarnings("serial")
-public class QuanLyNguoiHoc extends JFrame {
+public class QuanLyNguoiHoc extends JInternalFrame {
 
 	private JPanel contentPane;
 	private JTextField textMaNH;
@@ -89,35 +93,44 @@ public class QuanLyNguoiHoc extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(new BorderLayout(0, 0));
 
-		JLabel lblQunLChuyn = new JLabel("QUẢN LÝ NGƯỜI HỌC");
+		JLabel lblQunLChuyn = new JLabel(" QUẢN LÝ NGƯỜI HỌC");
 		lblQunLChuyn.setForeground(Color.BLUE);
 		lblQunLChuyn.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblQunLChuyn.setBounds(10, 0, 257, 34);
-		contentPane.add(lblQunLChuyn);
-
+		contentPane.add(lblQunLChuyn, BorderLayout.NORTH);
+		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(10, 29, 603, 458);
-		contentPane.add(tabbedPane);
-
+		contentPane.add(tabbedPane, BorderLayout.CENTER);
+		
 		JPanel panel = new JPanel();
-		tabbedPane.addTab("Danh sÃ¡ch", null, panel, null);
-		panel.setLayout(null);
+		tabbedPane.addTab("Danh sách", null, panel, null);
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		JPanel top = new JPanel();
+		panel.add(top, BorderLayout.NORTH);
+		top.setLayout(new BorderLayout(0, 0));
+//
+//		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+//		tabbedPane.setBounds(10, 29, 603, 458);
+//		contentPane.add(tabbedPane);
+//
+//		JPanel panel = new JPanel();
+//		tabbedPane.addTab("Danh sÃ¡ch", null, panel, null);
+//		panel.setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("CHUYÊN ĐỀ");
+		JLabel lblNewLabel = new JLabel("  CHUYÊN ĐỀ");
 		lblNewLabel.setBounds(10, 11, 116, 14);
-		panel.add(lblNewLabel);
+		top.add(lblNewLabel, BorderLayout.NORTH);
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_3.setBounds(10, 25, 578, 42);
-		panel.add(panel_3);
-		panel_3.setLayout(null);
+		top.add(panel_3, BorderLayout.SOUTH);
 
 		textField = new JTextField(" Nhập mã người học cần tìm...!");
 		textField.setBounds(10, 11, 459, 23);
-		panel_3.add(textField);
 		textField.setColumns(10);
 
 		textField.addFocusListener(new FocusAdapter() {
@@ -138,34 +151,55 @@ public class QuanLyNguoiHoc extends JFrame {
 
 		JButton btnTim = new JButton("Tìm");
 		btnTim.setBounds(479, 10, 89, 23);
-		panel_3.add(btnTim);
-
+		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
+		gl_panel_3.setHorizontalGroup(
+			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_panel_3.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(textField, GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+					.addGap(10)
+					.addComponent(btnTim)
+					.addGap(129))
+		);
+		gl_panel_3.setVerticalGroup(
+			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_panel_3.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panel_3.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnTim)
+						.addComponent(textField, GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		panel_3.setLayout(gl_panel_3);
+		
+		JPanel panel_1 = new JPanel();
+		panel.add(panel_1, BorderLayout.CENTER);
+		panel_1.setLayout(new BorderLayout(0, 0));
+		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 78, 578, 325);
-		panel.add(scrollPane);
+		panel_1.add(scrollPane, BorderLayout.CENTER);
+//
+//		JScrollPane scrollPane = new JScrollPane();
+//		scrollPane.setBounds(10, 78, 578, 325);
+//		panel.add(scrollPane);
 
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		model.addColumn("MÃ NH");
 		model.addColumn("HỌ VÀ TÊN");
-		model.addColumn("GIỚI TÍNH");
 		model.addColumn("NGÀY SINH");
+		model.addColumn("GIỚI TÍNH");
 		model.addColumn("SỐ ĐIỆN THOẠI");
 		model.addColumn("EMAIL");
-		model.addColumn("MÃ NV");
 		model.addColumn("NGÀY ĐKÍ");
+		model.addColumn("MÃ NV");
 		table.setModel(model);
-
-		JPanel panel_1 = new JPanel();
-		tabbedPane.addTab("Cập nhật", null, panel_1, null);
-		panel_1.setLayout(null);
-
+		
 		JPanel panel_2 = new JPanel();
+		tabbedPane.addTab("Cập nhật", null, panel_2, null);
 		panel_2.setLayout(null);
-		panel_2.setBounds(0, 0, 598, 426);
-		panel_1.add(panel_2);
 
-		JLabel lblNewLabel_2 = new JLabel("MÃ£ ngÆ°á»�ihá»�c");
+		JLabel lblNewLabel_2 = new JLabel("Mã người học");
 		lblNewLabel_2.setBounds(10, 11, 227, 14);
 		panel_2.add(lblNewLabel_2);
 

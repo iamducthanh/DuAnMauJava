@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import com.edusys.dao.INhanVienDao;
 import com.edusys.helper.JDBCHelper;
 import com.edusys.mapper.NhanVienMapper;
@@ -39,7 +41,7 @@ public class NhanVienDao implements INhanVienDao{
 			ps = conn.prepareStatement("update nhanvien set matkhau = ? where manv = ?");
 			ps.setString(1, newPass);
 			ps.setString(2, user);
-			System.out.println(newPass);
+			JOptionPane.showMessageDialog(null, "Đổi mật khẩu thành công!");
 			return ps.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

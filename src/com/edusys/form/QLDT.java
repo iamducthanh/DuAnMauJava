@@ -3,8 +3,8 @@ package com.edusys.form;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Insets;
-import java.awt.Label;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,7 +27,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.edusys.helper.Clock;
-import java.awt.Font;
+import javax.swing.JDesktopPane;
+import java.awt.CardLayout;
 
 @SuppressWarnings("serial")
 public class QLDT extends JFrame {
@@ -35,6 +36,7 @@ public class QLDT extends JFrame {
 	private JPanel contentPane;
 	static int vaiTro;
 	static String user;
+	JDesktopPane desktopPane = new JDesktopPane();
 
 	/**
 	 * Launch the application.
@@ -62,6 +64,7 @@ public class QLDT extends JFrame {
 		setTitle("HỆ THỐNG QUẢN LÝ ĐÀO TẠO");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 759, 514);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -163,9 +166,13 @@ public class QLDT extends JFrame {
         btnHuongDan.setContentAreaFilled(false);
         btnHuongDan.setBorder(null);
         
-        JLabel lblNewLabel_1 = new JLabel("", SwingConstants.CENTER);
-        lblNewLabel_1.setIcon(new ImageIcon("C:\\udpm\\Image\\ong.png"));
-        contentPane.add(lblNewLabel_1, BorderLayout.CENTER);
+        
+        contentPane.add(desktopPane, BorderLayout.CENTER);
+        desktopPane.setLayout(new CardLayout(0, 0));
+        
+//        JLabel lblNewLabel_1 = new JLabel("", SwingConstants.CENTER);
+//        lblNewLabel_1.setIcon(new ImageIcon("C:\\udpm\\Image\\ong.png"));
+//        contentPane.add(lblNewLabel_1, BorderLayout.CENTER);
 		
 			
 		JMenu mnNewMenu = new JMenu("Hệ thống");
@@ -328,6 +335,14 @@ public class QLDT extends JFrame {
 		QLDT.this.dispose();
 	}
 	
+	public void close() {
+		try {
+			desktopPane.getAllFrames()[0].setVisible(false);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
 	ActionListener openNhanVien = new ActionListener() {
 		
 		@Override
@@ -335,8 +350,9 @@ public class QLDT extends JFrame {
 			// TODO Auto-generated method stub
 			if(vaiTro == 1) {
 				QuanLyNhanVien nhanVien = new QuanLyNhanVien();
+				close();
+				desktopPane.add(nhanVien);
 				nhanVien.setVisible(true);
-				nhanVien.setLocationRelativeTo(null);
 			} else {
 				JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập mục này!");
 			}
@@ -352,8 +368,9 @@ public class QLDT extends JFrame {
 			if(vaiTro != 1) {
 				khoaHoc.btnXoa.setEnabled(false);
 			}
+			close();
+			desktopPane.add(khoaHoc);
 			khoaHoc.setVisible(true);
-			khoaHoc.setLocationRelativeTo(null);
 		}
 	};
 	
@@ -366,8 +383,9 @@ public class QLDT extends JFrame {
 			if(vaiTro != 1) {
 				chuyenDe.btnXoa.setEnabled(false);
 			}
+			close();
+			desktopPane.add(chuyenDe);
 			chuyenDe.setVisible(true);
-			chuyenDe.setLocationRelativeTo(null);
 		}
 	};
 	
@@ -380,8 +398,9 @@ public class QLDT extends JFrame {
 			if(vaiTro != 1) {
 				hocVien.btnXoa.setEnabled(false);
 			}
+			close();
+			desktopPane.add(hocVien);
 			hocVien.setVisible(true);
-			hocVien.setLocationRelativeTo(null);
 		}
 	};
 	
@@ -394,8 +413,9 @@ public class QLDT extends JFrame {
 			if(vaiTro != 1) {
 				nguoiHoc.btnXoa.setEnabled(false);
 			}
+			close();
+			desktopPane.add(nguoiHoc);
 			nguoiHoc.setVisible(true);
-			nguoiHoc.setLocationRelativeTo(null);
 		}
 	};
 	
@@ -405,8 +425,9 @@ public class QLDT extends JFrame {
 			// TODO Auto-generated method stub
 			if(vaiTro == 1) {
 				ThongKe thongKe = new ThongKe();
+				close();
+				desktopPane.add(thongKe);
 				thongKe.setVisible(true);
-				thongKe.setLocationRelativeTo(null);
 			} else {
 				JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập mục này!");
 			}
@@ -420,8 +441,9 @@ public class QLDT extends JFrame {
 			// TODO Auto-generated method stub
 			if(vaiTro == 1) {
 				ThongKe thongKe = new ThongKe();
+				close();
+				desktopPane.add(thongKe);
 				thongKe.setVisible(true);
-				thongKe.setLocationRelativeTo(null);
 				thongKe.tabbedPane.setSelectedIndex(1);
 			} else {
 				JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập mục này!");
@@ -435,8 +457,9 @@ public class QLDT extends JFrame {
 			// TODO Auto-generated method stub
 			if(vaiTro == 1) {
 				ThongKe thongKe = new ThongKe();
+				close();
+				desktopPane.add(thongKe);
 				thongKe.setVisible(true);
-				thongKe.setLocationRelativeTo(null);
 				thongKe.tabbedPane.setSelectedIndex(2);
 			} else {
 				JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập mục này!");
@@ -450,8 +473,9 @@ public class QLDT extends JFrame {
 			// TODO Auto-generated method stub
 			if(vaiTro == 1) {
 				ThongKe thongKe = new ThongKe();
+				close();
+				desktopPane.add(thongKe);
 				thongKe.setVisible(true);
-				thongKe.setLocationRelativeTo(null);
 				thongKe.tabbedPane.setSelectedIndex(3);
 			} else {
 				JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập mục này!");

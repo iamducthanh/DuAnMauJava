@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -30,9 +31,10 @@ import com.edusys.dao.impl.ChuyenDeDao;
 import com.edusys.helper.FormHelper;
 import com.edusys.helper.Validate;
 import com.edusys.model.ChuyenDe;
+import java.awt.BorderLayout;
 
 @SuppressWarnings("serial")
-public class QuanLyChuyenDe extends JFrame {
+public class QuanLyChuyenDe extends JInternalFrame {
 
 	private JPanel contentPane;
 	private JTable table;
@@ -81,18 +83,23 @@ public class QuanLyChuyenDe extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(new BorderLayout(0, 0));
 
 		JLabel lblQunLChuyn = new JLabel("QUẢN LÝ CHUYÊN ĐỀ");
 		lblQunLChuyn.setForeground(Color.BLUE);
 		lblQunLChuyn.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblQunLChuyn.setBounds(10, 11, 257, 34);
-		contentPane.add(lblQunLChuyn);
-
+		contentPane.add(lblQunLChuyn, BorderLayout.NORTH);
+		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(10, 39, 602, 482);
-		contentPane.add(tabbedPane);
+		contentPane.add(tabbedPane, BorderLayout.CENTER);
+		
 
+//
+//		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+//		tabbedPane.setBounds(10, 39, 602, 482);
+//		contentPane.add(tabbedPane);
+//
 		JScrollPane scrollPane = new JScrollPane();
 		tabbedPane.addTab("DANH SÁCH", null, scrollPane, null);
 

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -30,9 +31,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.awt.BorderLayout;
 
 @SuppressWarnings("serial")
-public class QuanLyNhanVien extends JFrame {
+public class QuanLyNhanVien extends JInternalFrame {
 
 	private JPanel contentPane;
 	private JTable table;
@@ -74,31 +76,36 @@ public class QuanLyNhanVien extends JFrame {
 
 	public QuanLyNhanVien() {
 		setTitle("Quản lý nhân viên");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 597, 392);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(new BorderLayout(0, 0));
+
 
 		JLabel lblQunLNhn = new JLabel("QUẢN LÝ NHÂN VIÊN");
 		lblQunLNhn.setForeground(Color.BLUE);
 		lblQunLNhn.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblQunLNhn.setBounds(10, 0, 257, 34);
-		contentPane.add(lblQunLNhn);
-
+		contentPane.add(lblQunLNhn, BorderLayout.NORTH);
+		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(10, 32, 563, 312);
-		contentPane.add(tabbedPane);
+		contentPane.add(tabbedPane, BorderLayout.CENTER);
+		
+
 
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("Danh sách", null, panel, null);
-		panel.setLayout(null);
-
+		panel.setLayout(new BorderLayout(0, 0));
+		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 538, 262);
-		panel.add(scrollPane);
-
+		panel.add(scrollPane, BorderLayout.CENTER);
+//
+//		JScrollPane scrollPane = new JScrollPane();
+//		scrollPane.setBounds(10, 11, 538, 262);
+//		panel.add(scrollPane);
+//
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		model.addColumn("USERNAME");
@@ -107,10 +114,18 @@ public class QuanLyNhanVien extends JFrame {
 		model.addColumn("VAI TRÒ");
 		table.setModel(model);
 
+		JPanel capnhat = new JPanel();
+		tabbedPane.addTab("Cập nhật", null, capnhat, null);
+		capnhat.setLayout(new BorderLayout(0, 0));
+		
 		JPanel panel_1 = new JPanel();
-		tabbedPane.addTab("Cập nhật", null, panel_1, null);
+		capnhat.add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(null);
-
+		
+//		JPanel panel_1 = new JPanel();
+//		panel_1111.add(panel_1, BorderLayout.CENTER);
+//		panel_1.setLayout(null);
+//
 		JLabel lblNewLabel = new JLabel("Mã nhân viên");
 		lblNewLabel.setBounds(10, 11, 161, 14);
 		panel_1.add(lblNewLabel);

@@ -58,7 +58,7 @@ public class ChangePassword extends JFrame {
 	Action loginAction = new AbstractAction() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+
 		}
 	};
 	private JButton btnCancel;
@@ -186,14 +186,14 @@ public class ChangePassword extends JFrame {
 				btnCancel.setBorder(new LineBorder(new Color(64, 64, 64), 1));
 			}
 		});
-		
+
 		btnCancel.setForeground(Color.BLACK);
 		btnCancel.setContentAreaFilled(false);
 		btnCancel.setBorder(new LineBorder(Color.DARK_GRAY));
 		btnCancel.setBackground(Color.BLACK);
 		btnCancel.setBounds(243, 179, 89, 23);
 		contentPane.add(btnCancel);
-		
+
 		textComfirm = new JTextField(" Comfirm password");
 		textComfirm.setForeground(Color.BLACK);
 		textComfirm.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -202,7 +202,7 @@ public class ChangePassword extends JFrame {
 		textComfirm.setBackground(Color.WHITE);
 		textComfirm.setBounds(145, 128, 205, 27);
 		contentPane.add(textComfirm);
-		
+
 		textComfirm.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -218,19 +218,17 @@ public class ChangePassword extends JFrame {
 				}
 			}
 		});
-		
+
 	}
-	
+
 	public void getUser(String user) {
 		textUsername.setText(user);
 	}
-	
+
 	public void change() {
-		if(textComfirm.getText().equals(textPassword.getText())) {
-			if(new NhanVienDao().changePass(textUsername.getText(), textComfirm.getText())) {
-				JOptionPane.showMessageDialog(null, "Đổi mật khẩu thành công!");
-				ChangePassword.this.dispose();
-			}
+		if (textComfirm.getText().equals(textPassword.getText())) {
+			new NhanVienDao().changePass(textUsername.getText(), textComfirm.getText());
+			ChangePassword.this.dispose();
 		} else {
 			JOptionPane.showMessageDialog(null, "New password và comfirm password phải giống nhau!");
 		}

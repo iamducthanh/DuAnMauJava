@@ -94,7 +94,7 @@ public class QuanLyKhoaHoc extends JInternalFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel top = new JPanel();
 		contentPane.add(top, BorderLayout.NORTH);
 		top.setLayout(new BorderLayout(0, 0));
@@ -108,32 +108,33 @@ public class QuanLyKhoaHoc extends JInternalFrame {
 				loadKhoaHoc();
 				textChuyenDe.setText((String) comboBox.getSelectedItem());
 				listChuyenDe.forEach((cd) -> {
-					if(cd.getTenCD().equals(comboBox.getSelectedItem())) {
+					if (cd.getTenCD().equals(comboBox.getSelectedItem())) {
 						textHocPhi.setText(cd.getHocPhi());
 						textThoiLuong.setText(cd.getThoiLuong());
-						
+
 					}
 				});
-				display(0);
+				if (listKhoaHocs.size() == 0) {
+					textArea.setText("");
+					textKhaiGiang.setText("");
+					textNgayTao.setText("");
+					textNguoiTao.setText("");
+				} else {
+					display(0);
+				}
 			}
 		});
 
 		comboBox.setBounds(10, 11, 582, 22);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(comboBox, 0, 588, Short.MAX_VALUE)
-					.addContainerGap())
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(7, Short.MAX_VALUE))
-		);
+				gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel.createSequentialGroup()
+						.addContainerGap().addComponent(comboBox, 0, 588, Short.MAX_VALUE).addContainerGap()));
+		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel
+						.createSequentialGroup().addContainerGap().addComponent(comboBox, GroupLayout.PREFERRED_SIZE,
+								GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(7, Short.MAX_VALUE)));
 		panel.setLayout(gl_panel);
 
 		JLabel lblChuyn = new JLabel("CHUYÊN ĐỀ");
@@ -141,14 +142,14 @@ public class QuanLyKhoaHoc extends JInternalFrame {
 		lblChuyn.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblChuyn.setBounds(10, 0, 257, 34);
 		top.add(lblChuyn, BorderLayout.NORTH);
-		
+
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
-		
+
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("Danh sách", null, panel_1, null);
 		panel_1.setLayout(new BorderLayout(0, 0));
-		
+
 		JScrollPane scrollPane_1 = new JScrollPane();
 		panel_1.add(scrollPane_1, BorderLayout.CENTER);
 
@@ -261,7 +262,7 @@ public class QuanLyKhoaHoc extends JInternalFrame {
 		});
 		btnMoi.setBounds(259, 281, 73, 23);
 		panel_2.add(btnMoi);
-		
+
 		btnHuy.setBounds(259, 281, 73, 23);
 		panel_2.add(btnHuy);
 		btnHuy.setVisible(false);
@@ -315,9 +316,9 @@ public class QuanLyKhoaHoc extends JInternalFrame {
 		btnPre.addActionListener(previous);
 		btnHuy.addActionListener(huy);
 	}
-	
+
 	ActionListener huy = new ActionListener() {
-		
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
@@ -375,11 +376,11 @@ public class QuanLyKhoaHoc extends JInternalFrame {
 					String maKH = (String) model.getValueAt(r, 0);
 					AbstractDao.executeQuery(
 							"update khoahoc set hocphi = ?, ngayKG = ?, thoiluong = ?, ngaytao = ?, ghichu = ? where makh = ?",
-							new Object[] { hocPhi, ngayKG, thoiLuong, ngayTao, ghiChu,  maKH});
+							new Object[] { hocPhi, ngayKG, thoiLuong, ngayTao, ghiChu, maKH });
 					JOptionPane.showMessageDialog(null, "Sửa thành công");
-				} else if(e.getActionCommand().equals("Xóa")) {
+				} else if (e.getActionCommand().equals("Xóa")) {
 					int a = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xóa?");
-					if(a == 0) {
+					if (a == 0) {
 						JOptionPane.showMessageDialog(null, "Xóa thành công!");
 						int r = table.getSelectedRow();
 						String maKH = (String) model.getValueAt(r, 0);
@@ -436,7 +437,7 @@ public class QuanLyKhoaHoc extends JInternalFrame {
 
 		});
 	}
-	
+
 	ActionListener first = new ActionListener() {
 
 		@Override

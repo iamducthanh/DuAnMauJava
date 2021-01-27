@@ -92,7 +92,6 @@ public class ThongKe extends JInternalFrame {
 		lblTngHpThng.setBounds(10, 0, 257, 34);
 		contentPane.add(lblTngHpThng, BorderLayout.NORTH);
 
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 
 		JPanel panel = new JPanel();
@@ -177,6 +176,11 @@ public class ThongKe extends JInternalFrame {
 
 		JLabel lblNewLabel_1 = new JLabel("NĂM");
 		lblNewLabel_1.setBounds(10, 11, 49, 14);
+		comboBox_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				thongKeDoanhThu();
+			}
+		});
 
 		comboBox_1.setBounds(48, 7, 625, 22);
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);

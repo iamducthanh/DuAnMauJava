@@ -32,6 +32,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import com.edusys.dao.impl.AbstractDao;
@@ -50,6 +51,7 @@ public class QuanLyNguoiHoc extends JInternalFrame {
 	private JTextField textEmail;
 	private JTextField textNgaySinh;
 	DefaultTableModel model = new DefaultTableModel();
+	DefaultTableCellRenderer fmTable = new DefaultTableCellRenderer();
 	private JTextField textField;
 	private JTable table;
 	JButton btnSua = new JButton("Sửa");
@@ -111,6 +113,7 @@ public class QuanLyNguoiHoc extends JInternalFrame {
 		JPanel top = new JPanel();
 		panel.add(top, BorderLayout.NORTH);
 		top.setLayout(new BorderLayout(0, 0));
+		fmTable.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
 //
 //		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 //		tabbedPane.setBounds(10, 29, 603, 458);
@@ -187,8 +190,8 @@ public class QuanLyNguoiHoc extends JInternalFrame {
 		scrollPane.setViewportView(table);
 		model.addColumn("MÃ NH");
 		model.addColumn("HỌ VÀ TÊN");
-		model.addColumn("NGÀY SINH");
 		model.addColumn("GIỚI TÍNH");
+		model.addColumn("NGÀY SINH");
 		model.addColumn("SỐ ĐIỆN THOẠI");
 		model.addColumn("EMAIL");
 		model.addColumn("NGÀY ĐKÍ");
@@ -307,6 +310,12 @@ public class QuanLyNguoiHoc extends JInternalFrame {
 		table.getColumnModel().getColumn(1).setPreferredWidth(100);
 		btnThem.addActionListener(them);
 		btnSua.addActionListener(them);
+		
+		table.getColumnModel().getColumn(0).setCellRenderer(fmTable);
+		table.getColumnModel().getColumn(2).setCellRenderer(fmTable);
+		table.getColumnModel().getColumn(3).setCellRenderer(fmTable);
+		table.getColumnModel().getColumn(4).setCellRenderer(fmTable);
+		table.getColumnModel().getColumn(6).setCellRenderer(fmTable);
 
 		btnMoi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -334,7 +343,7 @@ public class QuanLyNguoiHoc extends JInternalFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int r = table.getSelectedRow();
-				FormHelper.display(list, model, r, table);
+				display(r);
 			}
 		});
 		rdbtnNam.setSelected(true);
@@ -459,6 +468,7 @@ public class QuanLyNguoiHoc extends JInternalFrame {
 	public void display(int r) {
 		FormHelper.display(list, model, r, table);
 		textArea.setText(listNguoiHocs.get(r).getGhiChu());
+		System.out.println(listNguoiHocs.get(r).getGioiTinh());
 		if (listNguoiHocs.get(r).getGioiTinh().equals("1")) {
 			rdbtnNam.setSelected(true);
 		} else {

@@ -235,6 +235,7 @@ public class QuanLyHocVien extends JInternalFrame {
 		JButton btnThem = new JButton("Thêm vào khóa học");
 		btnThem.setBounds(480, 343, 171, 23);
 		panel_5.add(btnThem);
+		loadKhoaHoc();
 		loadNguoiHoc();
 		loadHocVien();
 		displayHocVien(0);
@@ -280,10 +281,14 @@ public class QuanLyHocVien extends JInternalFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			if(cbbKhoaHoc.getItemCount() == 0) {
+				JOptionPane.showMessageDialog(null, "Chuyên đề này không có khóa học nào!");
+			} else {
 			// TODO Auto-generated method stub
 			int[] r = table_1.getSelectedRows();
 			for (int i = 0; i < r.length; i++) {
-				String maNH = (String) model1.getValueAt(i, 0);
+				System.out.println(i);
+				String maNH = (String) model1.getValueAt(r[i], 0);
 				String maKH = (String) cbbKhoaHoc.getSelectedItem();
 				ResultSet fillHocVien = AbstractDao.fill("select * from hocvien where manh = ? and makh = ?", maNH,
 						maKH);
@@ -305,6 +310,7 @@ public class QuanLyHocVien extends JInternalFrame {
 			loadHocVien();
 			displayHocVien(0);
 			JOptionPane.showMessageDialog(null, "Thêm thành công!");
+			}
 		}
 	};
 

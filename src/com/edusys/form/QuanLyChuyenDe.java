@@ -1,5 +1,6 @@
 package com.edusys.form;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -24,6 +25,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import com.edusys.dao.impl.AbstractDao;
@@ -31,7 +33,6 @@ import com.edusys.dao.impl.ChuyenDeDao;
 import com.edusys.helper.FormHelper;
 import com.edusys.helper.Validate;
 import com.edusys.model.ChuyenDe;
-import java.awt.BorderLayout;
 
 @SuppressWarnings("serial")
 public class QuanLyChuyenDe extends JInternalFrame {
@@ -39,6 +40,7 @@ public class QuanLyChuyenDe extends JInternalFrame {
 	private JPanel contentPane;
 	private JTable table;
 	DefaultTableModel model = new DefaultTableModel();
+	DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
 	private JTextField textMa;
 	private JTextField textChuyenDe;
 	private JTextField textThoiLuong;
@@ -93,7 +95,7 @@ public class QuanLyChuyenDe extends JInternalFrame {
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
-		
+		rightRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
 
 //
 //		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -125,43 +127,43 @@ public class QuanLyChuyenDe extends JInternalFrame {
 
 		lblAnh.setIcon(new ImageIcon("C:\\udpm\\Image\\user.jpg"));
 		lblAnh.setBackground(Color.DARK_GRAY);
-		lblAnh.setBounds(15, 36, 153, 191);
+		lblAnh.setBounds(15, 36, 169, 191);
 		panel.add(lblAnh);
 
 		JLabel lblMChuyn = new JLabel("Mã chuyên đề");
-		lblMChuyn.setBounds(181, 11, 115, 14);
+		lblMChuyn.setBounds(194, 11, 115, 14);
 		panel.add(lblMChuyn);
 
 		textMa = new JTextField();
-		textMa.setBounds(180, 30, 405, 26);
+		textMa.setBounds(194, 30, 405, 26);
 		panel.add(textMa);
 		textMa.setColumns(10);
 
 		JLabel lblNewLabel_2_1 = new JLabel("Tên chuyên đề");
-		lblNewLabel_2_1.setBounds(181, 67, 115, 14);
+		lblNewLabel_2_1.setBounds(194, 67, 115, 14);
 		panel.add(lblNewLabel_2_1);
 
 		textChuyenDe = new JTextField();
 		textChuyenDe.setColumns(10);
-		textChuyenDe.setBounds(180, 87, 405, 26);
+		textChuyenDe.setBounds(194, 87, 405, 26);
 		panel.add(textChuyenDe);
 
 		JLabel lblNewLabel_2_1_1 = new JLabel("Thời lượng (giờ)");
-		lblNewLabel_2_1_1.setBounds(181, 124, 115, 14);
+		lblNewLabel_2_1_1.setBounds(194, 124, 115, 14);
 		panel.add(lblNewLabel_2_1_1);
 
 		textThoiLuong = new JTextField();
 		textThoiLuong.setColumns(10);
-		textThoiLuong.setBounds(180, 143, 405, 26);
+		textThoiLuong.setBounds(194, 143, 405, 26);
 		panel.add(textThoiLuong);
 
 		JLabel lblNewLabel_2_1_1_1 = new JLabel("Học phí");
-		lblNewLabel_2_1_1_1.setBounds(181, 180, 115, 14);
+		lblNewLabel_2_1_1_1.setBounds(194, 180, 115, 14);
 		panel.add(lblNewLabel_2_1_1_1);
 
 		textHocPhi = new JTextField();
 		textHocPhi.setColumns(10);
-		textHocPhi.setBounds(180, 201, 405, 26);
+		textHocPhi.setBounds(194, 201, 405, 26);
 		panel.add(textHocPhi);
 
 		JLabel lblMTiChuyn = new JLabel("Mô tải chuyên đề");
@@ -169,7 +171,7 @@ public class QuanLyChuyenDe extends JInternalFrame {
 		panel.add(lblMTiChuyn);
 
 		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(10, 263, 575, 121);
+		scrollPane_2.setBounds(10, 263, 590, 121);
 		panel.add(scrollPane_2);
 
 		scrollPane_2.setViewportView(textArea);
@@ -204,27 +206,28 @@ public class QuanLyChuyenDe extends JInternalFrame {
 
 		JButton btnPre = new JButton("<<");
 		btnPre.setFont(new Font("Tahoma", Font.BOLD, 8));
-		btnPre.setBounds(426, 408, 47, 23);
+		btnPre.setBounds(438, 408, 47, 23);
 		panel.add(btnPre);
 
 		JButton btnNext = new JButton(">>");
 		btnNext.setFont(new Font("Tahoma", Font.BOLD, 8));
-		btnNext.setBounds(483, 407, 47, 23);
+		btnNext.setBounds(495, 408, 47, 23);
 		panel.add(btnNext);
 
 		JButton btnLast = new JButton(">|");
 		btnLast.setFont(new Font("Tahoma", Font.BOLD, 8));
-		btnLast.setBounds(538, 407, 47, 23);
+		btnLast.setBounds(552, 408, 47, 23);
 		panel.add(btnLast);
 
 		JButton btnFirst = new JButton("|<");
 		btnFirst.setFont(new Font("Tahoma", Font.BOLD, 8));
-		btnFirst.setBounds(369, 407, 47, 23);
+		btnFirst.setBounds(381, 408, 47, 23);
 		panel.add(btnFirst);
 		loadTable();
 
 		table.getColumnModel().getColumn(0).setPreferredWidth(10);
 		table.getColumnModel().getColumn(1).setPreferredWidth(200);
+		table.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
 
 		list.add(textMa);
 		list.add(textChuyenDe);

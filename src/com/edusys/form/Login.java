@@ -3,12 +3,11 @@ package com.edusys.form;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -26,7 +25,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import com.edusys.dao.impl.NhanVienDao;
-import java.awt.Toolkit;
 
 @SuppressWarnings("serial")
 public class Login extends JFrame {
@@ -72,9 +70,9 @@ public class Login extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\udpm\\Image\\fpt.png"));
 		setTitle("Đăng nhập");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 497, 274);
+		setBounds(100, 100, 682, 372);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(0, 100, 0));
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setFocusable(true);
 		setContentPane(contentPane);
@@ -83,10 +81,10 @@ public class Login extends JFrame {
 		textUsername = new JTextField(" Username");
 		textUsername.setForeground(Color.black);
 		textUsername.setBackground(Color.white);
-		textUsername.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		textUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textUsername.setColumns(10);
 		textUsername.setBorder(new LineBorder(Color.WHITE));
-		textUsername.setBounds(198, 89, 257, 33);
+		textUsername.setBounds(342, 77, 257, 35);
 
 		contentPane.add(textUsername);
 
@@ -94,20 +92,20 @@ public class Login extends JFrame {
 		textPassword.setForeground(Color.black);
 		textPassword.setBackground(Color.white);
 		textPassword.setText(" Password");
-		textPassword.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		textPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textPassword.setColumns(10);
 		textPassword.setBorder(new LineBorder(Color.WHITE));
-		textPassword.setBounds(198, 133, 257, 33);
+		textPassword.setBounds(342, 138, 257, 35);
 		contentPane.add(textPassword);
 
-		JLabel lblLogin = new JLabel("ĐĂNG NHẬP");
-		lblLogin.setForeground(new Color(255, 255, 255));
+		JLabel lblLogin = new JLabel("XIN CHÀO!");
+		lblLogin.setForeground(Color.BLACK);
 		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 19));
-		lblLogin.setBounds(198, 38, 257, 40);
+		lblLogin.setBounds(413, 26, 203, 40);
 		contentPane.add(lblLogin);
 		btnLogin.setIcon(null);
 
-		btnLogin.setForeground(new Color(255, 255, 255));
+		btnLogin.setForeground(Color.WHITE);
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -118,14 +116,14 @@ public class Login extends JFrame {
 				}
 			}
 		});
-		btnLogin.setBorder(new LineBorder(new Color(255, 255, 255)));
+		btnLogin.setBorder(new LineBorder(Color.WHITE));
 		btnLogin.setBackground(Color.BLACK);
-		btnLogin.setBounds(267, 191, 89, 23);
+		btnLogin.setBounds(328, 208, 288, 45);
 		contentPane.add(btnLogin);
 
-		JLabel lblUser = new JLabel("New label");
-		lblUser.setIcon(new ImageIcon("C:\\udpm\\Image\\Secure.png"));
-		lblUser.setBounds(-41, 11, 257, 277);
+		JLabel lblUser = new JLabel("");
+		lblUser.setIcon(new ImageIcon("C:\\udpm\\Image\\ong.png"));
+		lblUser.setBounds(34, 0, 237, 340);
 		contentPane.add(lblUser);
 
 		textUsername.addFocusListener(new FocusAdapter() {
@@ -165,49 +163,60 @@ public class Login extends JFrame {
 		textUsername.addActionListener(loginAction);
 		textPassword.addActionListener(loginAction);
 
-		btnLogin.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				btnLogin.setBounds(264, 188, 95, 29);
-				btnLogin.setBorder(new LineBorder(new Color(255, 255, 255), 2));
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				btnLogin.setBounds(267, 191, 89, 23);
-				btnLogin.setBorder(new LineBorder(new Color(255, 255, 255), 1));
-			}
-		});
-
+//		btnLogin.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseEntered(MouseEvent e) {
+//				btnLogin.setBounds(264, 188, 95, 29);
+//				btnLogin.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+//			}
+//
+//			@Override
+//			public void mouseExited(MouseEvent e) {
+//				btnLogin.setBounds(267, 191, 89, 23);
+//				btnLogin.setBorder(new LineBorder(new Color(0, 0, 0), 1));
+//			}
+//		});
+//
 		btnLogin.setContentAreaFilled(false);
-
+//
 		btnCancel = new JButton("Kết thúc");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Login.this.dispose();
-				
+				System.exit(0);
 			}
 		});
-		btnCancel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				btnCancel.setBounds(363, 188, 95, 29);
-				btnCancel.setBorder(new LineBorder(new Color(255, 255, 255), 2));
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				btnCancel.setBounds(366, 191, 89, 23);
-				btnCancel.setBorder(new LineBorder(new Color(255, 255, 255), 1));
-			}
-		});
+//		btnCancel.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				Login.this.dispose();
+//				
+//			}
+//		});
+//		btnCancel.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseEntered(MouseEvent e) {
+//				btnCancel.setBounds(363, 188, 95, 29);
+//				btnCancel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+//			}
+//
+//			@Override
+//			public void mouseExited(MouseEvent e) {
+//				btnCancel.setBounds(366, 191, 89, 23);
+//				btnCancel.setBorder(new LineBorder(new Color(0, 0, 0), 1));
+//			}
+//		});
 		
-		btnCancel.setForeground(new Color(255, 255, 255));
+		btnCancel.setForeground(Color.WHITE);
 		btnCancel.setContentAreaFilled(false);
-		btnCancel.setBorder(new LineBorder(new Color(255, 255, 255)));
+		btnCancel.setBorder(new LineBorder(Color.WHITE));
 		btnCancel.setBackground(Color.BLACK);
-		btnCancel.setBounds(366, 191, 89, 23);
+		btnCancel.setBounds(328, 269, 288, 45);
 		contentPane.add(btnCancel);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\udpm\\Image\\login.jpg"));
+		lblNewLabel.setBounds(-20, -20, 650, 350);
+		lblNewLabel.setBackground(Color.black);
+		contentPane.add(lblNewLabel);
 		
 	}
 	

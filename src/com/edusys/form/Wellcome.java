@@ -58,7 +58,7 @@ public class Wellcome extends JFrame {
 		progressBar.setBounds(0, 215, 436, 37);
 		contentPane.add(progressBar);
 		
-		javax.swing.Timer timer = new javax.swing.Timer(20, setVlue);
+		javax.swing.Timer timer = new javax.swing.Timer(10, setVlue);
 		timer.start();
 	}
 	

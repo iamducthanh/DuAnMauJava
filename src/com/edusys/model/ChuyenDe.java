@@ -1,8 +1,6 @@
 package com.edusys.model;
 
-import java.io.Serializable;
-
-public class ChuyenDe implements Serializable{
+public class ChuyenDe {
 
     private String maCD;
     private String tenCD;

@@ -1,8 +1,6 @@
 package com.edusys.model;
 
-import java.io.Serializable;
-
-public class NhanVien implements Serializable{
+public class NhanVien {
 
     private String manv;
     private String password;

@@ -32,6 +32,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -44,8 +45,8 @@ import com.edusys.model.ChuyenDe;
 
 @SuppressWarnings("serial")
 public class QuanLyChuyenDe extends JInternalFrame {
-    InputStream inStream = null;
-    OutputStream outStream = null;
+	InputStream inStream = null;
+	OutputStream outStream = null;
 	private JPanel contentPane;
 	private JTable table;
 	DefaultTableModel model = new DefaultTableModel();
@@ -101,7 +102,7 @@ public class QuanLyChuyenDe extends JInternalFrame {
 		lblQunLChuyn.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblQunLChuyn.setBounds(10, 11, 257, 34);
 		contentPane.add(lblQunLChuyn, BorderLayout.NORTH);
-		
+
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 		rightRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
@@ -205,7 +206,7 @@ public class QuanLyChuyenDe extends JInternalFrame {
 				btnXoa.setEnabled(false);
 				btnMoi.setVisible(false);
 				btnHuy.setVisible(true);
-				
+
 			}
 		});
 		btnMoi.setBounds(259, 407, 73, 23);
@@ -255,24 +256,10 @@ public class QuanLyChuyenDe extends JInternalFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				JFileChooser file = new JFileChooser();
-				file.setFileFilter(new FileFilter() {
-					
-					@Override
-					public String getDescription() {
-						// TODO Auto-generated method stub
-						return "Image file (*.jpg)";
-					}
-					
-					@Override
-					public boolean accept(File f) {
-						// TODO Auto-generated method stub
-						if (f.isDirectory()) {
-							return true;
-						} else {
-							return f.getName().toLowerCase().endsWith(".jpg");
-						}
-					}
-				});
+				FileFilter filter = new FileNameExtensionFilter("JPG and PNG", new String[] { "JPG", "PNG" });
+//				FileNameExtensionFilter filter = new FileNameExtensionFilter("img", "png", "text");
+				file.setFileFilter(filter);
+
 				int i = file.showOpenDialog(null);
 				if (i == 0) {
 					path = file.getSelectedFile().getPath();
@@ -294,9 +281,9 @@ public class QuanLyChuyenDe extends JInternalFrame {
 		btnPre.addActionListener(previous);
 		btnHuy.addActionListener(huy);
 	}
-	
+
 	ActionListener huy = new ActionListener() {
-		
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
@@ -344,32 +331,30 @@ public class QuanLyChuyenDe extends JInternalFrame {
 				String moTa = textArea.getText();
 				if (!path.equals("")) {
 					file1 = new File(path);
-//					file1.renameTo(new File("C:\\udpm\\Image\\" + file1.getName()));
-					
-			        try {
-			            inStream = new FileInputStream(new File(path));
-			            outStream = new FileOutputStream(new File("C:\\udpm\\Image\\" + file1.getName()));
-			 
-			            int length;
-			            byte[] buffer = new byte[1024];
-			 
-			            // copy the file content in bytes
-			            while ((length = inStream.read(buffer)) > 0) {
-			                outStream.write(buffer, 0, length);
-			            }
-			        } catch (Exception e1) {
-			            e1.printStackTrace();
-			        } finally {
-			            try {
+				}
+				if (e.getActionCommand().equals("Thêm")) {
+					try {
+						inStream = new FileInputStream(new File(path));
+						outStream = new FileOutputStream(new File("C:\\udpm\\logo\\" + file1.getName()));
+
+						int length;
+						byte[] buffer = new byte[1024];
+
+						// copy the file content in bytes
+						while ((length = inStream.read(buffer)) > 0) {
+							outStream.write(buffer, 0, length);
+						}
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					} finally {
+						try {
 							inStream.close();
 							outStream.close();
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-			        }
-				}
-				if (e.getActionCommand().equals("Thêm")) {
+					}
 					try {
 						AbstractDao.executeQuery("insert into chuyende values (?,?,?,?,?,?)",
 								new Object[] { maCD, tenCD, hocPhi, thoiLuong, file1.getName(), moTa });
@@ -414,8 +399,8 @@ public class QuanLyChuyenDe extends JInternalFrame {
 		FormHelper.display(list, model, r, table);
 		textArea.setText(listChuyenDe.get(r).getMoTa());
 		try {
-			String pathImg = "C:\\udpm\\Image\\" + listChuyenDe.get(r).getHinh();
-			ImageIcon img = new ImageIcon(pathImg);
+			path = "C:\\udpm\\logo\\" + listChuyenDe.get(r).getHinh();
+			ImageIcon img = new ImageIcon(path);
 			int width = lblAnh.getWidth();
 			int height = lblAnh.getHeight();
 			Image image = ImageHelper.resize(img.getImage(), width, height);

@@ -5,9 +5,7 @@
  */
 package com.edusys.model;
 
-import java.io.Serializable;
-
-public class HocVien implements Serializable{
+public class HocVien {
 
     private String maHV;
     private String maKH, maNH;

@@ -46,7 +46,7 @@ public class Login extends JFrame {
 			public void run() {
 				try {
 					frame.setVisible(true);
-					frame.setTitle("Login");
+					frame.setTitle("Đăng nhập");
 					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -70,7 +70,7 @@ public class Login extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\udpm\\Image\\fpt.png"));
 		setTitle("Đăng nhập");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 682, 372);
+		setBounds(100, 100, 682, 384);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -24,15 +24,25 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+
 import com.edusys.dao.impl.AbstractDao;
 import com.edusys.dao.impl.ChuyenDeDao;
 import com.edusys.dao.impl.HocVienDao;
 import com.edusys.dao.impl.KhoaHocDao;
 import com.edusys.dao.impl.NguoiHocDao;
+import com.edusys.helper.BieuDoHelper;
 import com.edusys.model.ChuyenDe;
 import com.edusys.model.HocVien;
 import com.edusys.model.KhoaHoc;
 import com.edusys.model.NguoiHoc;
+import com.sun.tools.sjavac.comp.dependencies.PublicApiCollector;
+import javax.swing.JButton;
 
 @SuppressWarnings("serial")
 public class ThongKe extends JInternalFrame {
@@ -106,6 +116,7 @@ public class ThongKe extends JInternalFrame {
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loadBangDiem();
+
 			}
 		});
 
@@ -207,9 +218,17 @@ public class ThongKe extends JInternalFrame {
 		model3.addColumn("HP CN");
 		model3.addColumn("HP TB");
 		table_3.setModel(model3);
+		
+		JButton btnNewButton = new JButton("Xem biểu đồ");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showBieuDo();
+			}
+		});
+		contentPane.add(btnNewButton, BorderLayout.SOUTH);
 
 		loadKhoaHoc();
-		loadBangDiem();
+		// loadBangDiem();
 		try {
 			thongKeNguoiHoc();
 		} catch (SQLException e1) {
@@ -229,6 +248,20 @@ public class ThongKe extends JInternalFrame {
 			comboBox.addItem(cd.getMaKh());
 		});
 	}
+	
+	public void showBieuDo() {
+		int index = tabbedPane.getSelectedIndex();
+		switch (index) {
+		case 0:
+			new BieuDoHelper().thongKeDiem(model, table.getRowCount());
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	double slXuatSac, slGioi, slKha, slTrungBinh, slKem;
 
 	public void loadBangDiem() {
 		lisNguoiHocs.removeAll(lisNguoiHocs);
@@ -237,6 +270,12 @@ public class ThongKe extends JInternalFrame {
 
 		lisHocViens = new HocVienDao().fillAll();
 		lisNguoiHocs = new NguoiHocDao().fillAll();
+
+		slXuatSac = 0;
+		slGioi = 0;
+		slKha = 0;
+		slTrungBinh = 0;
+		slKem = 0;
 
 		lisHocViens.forEach((cd) -> {
 			String hoTen = null;
@@ -250,6 +289,7 @@ public class ThongKe extends JInternalFrame {
 				}
 			}
 		});
+
 	}
 
 	public void thongKeNguoiHoc() throws SQLException {

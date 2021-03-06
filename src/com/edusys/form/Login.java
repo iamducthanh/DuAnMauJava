@@ -162,20 +162,6 @@ public class Login extends JFrame {
 
 		textUsername.addActionListener(loginAction);
 		textPassword.addActionListener(loginAction);
-
-//		btnLogin.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseEntered(MouseEvent e) {
-//				btnLogin.setBounds(264, 188, 95, 29);
-//				btnLogin.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-//			}
-//
-//			@Override
-//			public void mouseExited(MouseEvent e) {
-//				btnLogin.setBounds(267, 191, 89, 23);
-//				btnLogin.setBorder(new LineBorder(new Color(0, 0, 0), 1));
-//			}
-//		});
 //
 		btnLogin.setContentAreaFilled(false);
 //
@@ -185,25 +171,6 @@ public class Login extends JFrame {
 				System.exit(0);
 			}
 		});
-//		btnCancel.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				Login.this.dispose();
-//				
-//			}
-//		});
-//		btnCancel.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseEntered(MouseEvent e) {
-//				btnCancel.setBounds(363, 188, 95, 29);
-//				btnCancel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-//			}
-//
-//			@Override
-//			public void mouseExited(MouseEvent e) {
-//				btnCancel.setBounds(366, 191, 89, 23);
-//				btnCancel.setBorder(new LineBorder(new Color(0, 0, 0), 1));
-//			}
-//		});
 		
 		btnCancel.setForeground(Color.WHITE);
 		btnCancel.setContentAreaFilled(false);

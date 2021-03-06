@@ -5,13 +5,11 @@
  */
 package com.edusys.model;
 
-import java.io.Serializable;
-
 /**
  *
  * @author User
  */
-public class NguoiHoc implements Serializable{
+public class NguoiHoc {
     private String maNH, hoTen, ngaySinh,gioiTinh;
     private String soDT;
     private String email, ngayDK,ghiChu, maNV;

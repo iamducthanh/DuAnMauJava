@@ -5,13 +5,11 @@
  */
 package com.edusys.model;
 
-import java.io.Serializable;
-
 /**
  *
  * @author User
  */
-public class KhoaHoc implements Serializable{
+public class KhoaHoc {
 
     private String maKh, maCD, ghiChu;
     private String hocPhi, thoiLuong;

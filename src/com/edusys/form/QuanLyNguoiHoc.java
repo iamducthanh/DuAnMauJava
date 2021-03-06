@@ -468,7 +468,6 @@ public class QuanLyNguoiHoc extends JInternalFrame {
 	public void display(int r) {
 		FormHelper.display(list, model, r, table);
 		textArea.setText(listNguoiHocs.get(r).getGhiChu());
-		System.out.println(listNguoiHocs.get(r).getGioiTinh());
 		if (listNguoiHocs.get(r).getGioiTinh().equals("1")) {
 			rdbtnNam.setSelected(true);
 		} else {

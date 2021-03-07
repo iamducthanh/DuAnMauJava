@@ -436,19 +436,23 @@ public class QuanLyNguoiHoc extends JInternalFrame {
 				String maNV = "a";
 				if (e.getActionCommand().equals("Thêm")) {
 					AbstractDao.executeQuery("insert into nguoihoc values (?,?,?,?,?,?,?,?,?)",
-							new Object[] { maNH, hoTen, gioiTinh, ngaySinh, dienThoai, email, ghiChu, ngayDK, maNV });
+							new Object[] { maNH, hoTen, ngaySinh, gioiTinh, dienThoai, email, ghiChu, maNV, ngayDK });
 					JOptionPane.showMessageDialog(null, "Thêm thành công!");
 				} else if (e.getActionCommand().equals("Sửa")) {
 					AbstractDao.executeQuery(
-							"update NguoiHoc set hote = ?, gioitinh = ?, ngaysinh = ?, dienthoai = ?, email = ?, ghichu = ?, ngaydk = ? where MaNH = ?",
+							"update NguoiHoc set hoten = ?, gioitinh = ?, ngaysinh = ?, dienthoai = ?, email = ?, ghichu = ?, ngaydk = ? where MaNH = ?",
 							new Object[] { hoTen, gioiTinh, ngaySinh, dienThoai, email, ghiChu, ngayDK,
 									textMaNH.getText() });
 					JOptionPane.showMessageDialog(null, "Sửa thành công!");
 				} else if (e.getActionCommand().equals("Xóa")) {
-					int a = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xóa?");
-					if (a == 0) {
-						JOptionPane.showMessageDialog(null, "Xóa thành công!");
-						AbstractDao.executeQuery("delete from nguoihoc where manh = ?", textMaNH.getText());
+					if(QLDT.vaiTro == 1) {
+						int a = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xóa?");
+						if (a == 0) {
+							JOptionPane.showMessageDialog(null, "Xóa thành công!");
+							AbstractDao.executeQuery("delete from nguoihoc where manh = ?", textMaNH.getText());
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Bạn không có quyền xóa!");
 					}
 				}
 				btnThem.setEnabled(false);

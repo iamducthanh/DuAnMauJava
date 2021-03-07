@@ -179,7 +179,10 @@ public class ThongKe extends JInternalFrame {
 		table_2.setModel(model2);
 //
 		JPanel DoanhThu = new JPanel();
-		tabbedPane.addTab("DOANH THU", null, DoanhThu, null);
+		
+		if(QLDT.vaiTro == 1) {
+			tabbedPane.addTab("DOANH THU", null, DoanhThu, null);
+		}
 		DoanhThu.setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_2 = new JPanel();
@@ -254,6 +257,9 @@ public class ThongKe extends JInternalFrame {
 		switch (index) {
 		case 0:
 			new BieuDoHelper().thongKeDiem(model, table.getRowCount());
+			break;
+		case 1:
+			new BieuDoHelper().thongKeNguoiHoc(model1);
 			break;
 
 		default:

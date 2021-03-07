@@ -379,12 +379,16 @@ public class QuanLyKhoaHoc extends JInternalFrame {
 							new Object[] { hocPhi, ngayKG, thoiLuong, ngayTao, ghiChu, maKH });
 					JOptionPane.showMessageDialog(null, "Sửa thành công");
 				} else if (e.getActionCommand().equals("Xóa")) {
-					int a = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xóa?");
-					if (a == 0) {
-						JOptionPane.showMessageDialog(null, "Xóa thành công!");
-						int r = table.getSelectedRow();
-						String maKH = (String) model.getValueAt(r, 0);
-						AbstractDao.executeQuery("delete from khoahoc where makh = ?", maKH);
+					if(QLDT.vaiTro == 1) {
+						int a = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xóa?");
+						if (a == 0) {
+							JOptionPane.showMessageDialog(null, "Xóa thành công!");
+							int r = table.getSelectedRow();
+							String maKH = (String) model.getValueAt(r, 0);
+							AbstractDao.executeQuery("delete from khoahoc where makh = ?", maKH);
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Bạn không có quyền xóa!");
 					}
 				}
 				btnThem.setEnabled(false);

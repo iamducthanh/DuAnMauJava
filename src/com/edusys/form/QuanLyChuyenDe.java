@@ -375,10 +375,14 @@ public class QuanLyChuyenDe extends JInternalFrame {
 					}
 					JOptionPane.showMessageDialog(null, "Sửa thành công");
 				} else if (e.getActionCommand().equals("Xóa")) {
-					int a = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xóa?");
-					if (a == 0) {
-						JOptionPane.showMessageDialog(null, "Xóa thành công!");
-						AbstractDao.executeQuery("delete from ChuyenDe where macd = ?", textMa.getText());
+					if(QLDT.vaiTro == 1) {
+						int a = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xóa?");
+						if (a == 0) {
+							JOptionPane.showMessageDialog(null, "Xóa thành công!");
+							AbstractDao.executeQuery("delete from ChuyenDe where macd = ?", textMa.getText());
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Bạn không có quyền xóa!");
 					}
 				}
 				btnThem.setEnabled(false);
